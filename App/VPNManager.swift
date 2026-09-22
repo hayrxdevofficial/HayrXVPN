@@ -11,16 +11,12 @@ final class VPNManager: ObservableObject {
 
     private var manager: NETunnelProviderManager?
 
-    // MARK: - Lifecycle
-
     func prepare() {
         Task {
             await loadOrCreateManager()
             observeStatus()
         }
     }
-
-    // MARK: - Public
 
     func toggle() {
         isConnected ? stop() : start()
@@ -65,8 +61,6 @@ final class VPNManager: ObservableObject {
         statusText = "Отключение..."
     }
 
-    // MARK: - Manager
-
     private func loadOrCreateManager() async {
         do {
             let managers = try await NETunnelProviderManager.loadAllFromPreferences()
@@ -96,8 +90,6 @@ final class VPNManager: ObservableObject {
             statusText = "Ошибка инициализации: \(error.localizedDescription)"
         }
     }
-
-    // MARK: - Status observation
 
     private func observeStatus() {
         NotificationCenter.default.addObserver(
