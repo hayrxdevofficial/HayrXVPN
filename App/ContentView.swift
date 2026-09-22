@@ -3,16 +3,12 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var vpn = VPNManager()
 
-    // Фирменный фиолетовый из логотипа
     private let brandPurple = Color(red: 0.51, green: 0.20, blue: 0.92)
 
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [
-                    brandPurple.opacity(0.25),
-                    Color.black
-                ],
+                colors: [brandPurple.opacity(0.25), Color.black],
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -21,7 +17,6 @@ struct ContentView: View {
             VStack(spacing: 28) {
                 Spacer()
 
-                // Заглушка вместо иконки — SF Symbol
                 ZStack {
                     RoundedRectangle(cornerRadius: 28, style: .continuous)
                         .fill(brandPurple)
