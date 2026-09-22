@@ -10,7 +10,7 @@ options:
 packages:
   SwiftyXrayKit:
     url: https://github.com/dima-u/SwiftyXrayKit
-    from: 1.1.0
+    from: 2.0.0
 
 settings:
   base:
