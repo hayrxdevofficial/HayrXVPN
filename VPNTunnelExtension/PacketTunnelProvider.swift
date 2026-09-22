@@ -45,7 +45,6 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
 
         try? FileManager.default.createDirectory(at: dataDir, withIntermediateDirectories: true)
 
-        // ✅ Создаём мост и запускаем Xray
         let bridge = XrayBridge(packetFlow: packetFlow)
         try bridge.start(
             config: .url(vlessURL),
