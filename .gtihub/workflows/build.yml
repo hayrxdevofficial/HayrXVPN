@@ -1,16 +1,23 @@
-name: Build iOS
+name: Build HayrXVPN
 
 on:
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: macos-latest
+    name: Build iOS App
+    runs-on: macos-14
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app
 
       - name: Install XcodeGen
         run: brew install xcodegen
@@ -18,7 +25,10 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
-      - name: Build (без подписи)
+      - name: List files
+        run: ls -la
+
+      - name: Build app (без подписи)
         run: |
           xcodebuild \
             -project HayrXVPN.xcodeproj \
@@ -26,4 +36,6 @@ jobs:
             -sdk iphoneos \
             -configuration Release \
             CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
             build
