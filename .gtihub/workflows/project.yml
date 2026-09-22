@@ -1,33 +1,31 @@
-name: MyVPN
-options:
-  bundleIdPrefix: com.example
-  deploymentTarget:
-    iOS: 15.0
+name: HayrXVPN
 
 targets:
-  MyVPN:
+  HayrXVPN:
     type: application
     platform: iOS
     sources: [App, Shared]
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.example.MyVPN
+        PRODUCT_NAME: HayrXVPN
+        PRODUCT_BUNDLE_IDENTIFIER: com.hayrxvpn.ios
         INFOPLIST_FILE: App/Info.plist
-        CODE_SIGN_ENTITLEMENTS: App/MyVPN.entitlements
+        CODE_SIGN_ENTITLEMENTS: App/HayrXVPN.entitlements
         CODE_SIGN_STYLE: Manual
         DEVELOPMENT_TEAM: YOUR_TEAM_ID
     dependencies:
-      - target: VPNTunnelExtension
+      - target: HayrXVPNTunnel
         embed: true
 
-  VPNTunnelExtension:
+  HayrXVPNTunnel:
     type: app-extension
     platform: iOS
     sources: [VPNTunnelExtension, Shared]
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.example.MyVPN.VPNTunnelExtension
+        PRODUCT_NAME: HayrXVPNTunnel
+        PRODUCT_BUNDLE_IDENTIFIER: com.hayrxvpn.ios.tunnel
         INFOPLIST_FILE: VPNTunnelExtension/Info.plist
-        CODE_SIGN_ENTITLEMENTS: VPNTunnelExtension/VPNTunnelExtension.entitlements
+        CODE_SIGN_ENTITLEMENTS: VPNTunnelExtension/HayrXVPNTunnel.entitlements
         CODE_SIGN_STYLE: Manual
         DEVELOPMENT_TEAM: YOUR_TEAM_ID
