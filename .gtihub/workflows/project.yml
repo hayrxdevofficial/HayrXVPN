@@ -1,14 +1,29 @@
 name: HayrXVPN
+
 options:
   bundleIdPrefix: com.hayrxvpn
   deploymentTarget:
-    iOS: 15.0
+    iOS: "15.0"
+  createIntermediateGroups: true
+
+# 👇 НОВЫЙ БЛОК — объявление Swift Package
+packages:
+  SwiftyXrayKit:
+    url: https://github.com/dima-u/SwiftyXrayKit
+    from: 1.1.0
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    IPHONEOS_DEPLOYMENT_TARGET: "15.0"
 
 targets:
   HayrXVPN:
     type: application
     platform: iOS
-    sources: [App, Shared]
+    sources:
+      - path: App
+      - path: Shared
     settings:
       base:
         PRODUCT_NAME: HayrXVPN
@@ -16,7 +31,10 @@ targets:
         INFOPLIST_FILE: App/Info.plist
         CODE_SIGN_ENTITLEMENTS: App/HayrXVPN.entitlements
         CODE_SIGN_STYLE: Manual
-        DEVELOPMENT_TEAM: YOUR_TEAM_ID # <-- Замени на свой Team ID
+        DEVELOPMENT_TEAM: YOUR_TEAM_ID
+        TARGETED_DEVICE_FAMILY: "1,2"
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
     dependencies:
       - target: HayrXVPNTunnel
         embed: true
@@ -24,7 +42,9 @@ targets:
   HayrXVPNTunnel:
     type: app-extension
     platform: iOS
-    sources: [VPNTunnelExtension, Shared]
+    sources:
+      - path: VPNTunnelExtension
+      - path: Shared
     settings:
       base:
         PRODUCT_NAME: HayrXVPNTunnel
@@ -32,4 +52,10 @@ targets:
         INFOPLIST_FILE: VPNTunnelExtension/Info.plist
         CODE_SIGN_ENTITLEMENTS: VPNTunnelExtension/HayrXVPNTunnel.entitlements
         CODE_SIGN_STYLE: Manual
-        DEVELOPMENT_TEAM: YOUR_TEAM_ID # <-- Замени на свой Team ID
+        DEVELOPMENT_TEAM: YOUR_TEAM_ID
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+    # 👇 НОВЫЙ БЛОК — зависимость расширения от пакета
+    dependencies:
+      - package: SwiftyXrayKit
+        product: SwiftyXrayKit
