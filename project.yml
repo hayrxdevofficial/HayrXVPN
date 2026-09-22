@@ -8,12 +8,11 @@ options:
 
 packages:
   SwiftyXrayKit:
-    url: https://github.com/dima-u/SwiftyXrayKit
-    from: 2.0.0
+    url: https://github.com/hayrxdevofficial/SwiftyXrayKit
+    branch: main
 
 settings:
   base:
-    # ✅ Переключаемся на Swift 5.9, чтобы избежать строгих проверок Swift 6
     SWIFT_VERSION: "5.9"
     IPHONEOS_DEPLOYMENT_TARGET: "15.0"
 
@@ -35,10 +34,6 @@ targets:
         TARGETED_DEVICE_FAMILY: "1,2"
         MARKETING_VERSION: "1.0.0"
         CURRENT_PROJECT_VERSION: "1"
-        # ✅ Явно отключаем подпись для сборки архива
-        CODE_SIGNING_ALLOWED: "NO"
-        CODE_SIGNING_REQUIRED: "NO"
-        CODE_SIGN_IDENTITY: ""
     dependencies:
       - target: HayrXVPNTunnel
         embed: true
@@ -59,9 +54,6 @@ targets:
         DEVELOPMENT_TEAM: YOUR_TEAM_ID
         MARKETING_VERSION: "1.0.0"
         CURRENT_PROJECT_VERSION: "1"
-        CODE_SIGNING_ALLOWED: "NO"
-        CODE_SIGNING_REQUIRED: "NO"
-        CODE_SIGN_IDENTITY: ""
     dependencies:
       - package: SwiftyXrayKit
         product: SwiftyXrayKit
