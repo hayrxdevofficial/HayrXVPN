@@ -1,0 +1,33 @@
+name: MyVPN
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: 15.0
+
+targets:
+  MyVPN:
+    type: application
+    platform: iOS
+    sources: [App, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.MyVPN
+        INFOPLIST_FILE: App/Info.plist
+        CODE_SIGN_ENTITLEMENTS: App/MyVPN.entitlements
+        CODE_SIGN_STYLE: Manual
+        DEVELOPMENT_TEAM: YOUR_TEAM_ID
+    dependencies:
+      - target: VPNTunnelExtension
+        embed: true
+
+  VPNTunnelExtension:
+    type: app-extension
+    platform: iOS
+    sources: [VPNTunnelExtension, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.MyVPN.VPNTunnelExtension
+        INFOPLIST_FILE: VPNTunnelExtension/Info.plist
+        CODE_SIGN_ENTITLEMENTS: VPNTunnelExtension/VPNTunnelExtension.entitlements
+        CODE_SIGN_STYLE: Manual
+        DEVELOPMENT_TEAM: YOUR_TEAM_ID
