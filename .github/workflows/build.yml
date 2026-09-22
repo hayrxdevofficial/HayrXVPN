@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Show default Xcode
+      - name: Show Xcode version
         run: xcodebuild -version
 
       - name: Install XcodeGen
