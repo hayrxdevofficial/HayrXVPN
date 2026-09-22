@@ -1,4 +1,8 @@
 name: HayrXVPN
+options:
+  bundleIdPrefix: com.hayrxvpn
+  deploymentTarget:
+    iOS: 15.0
 
 targets:
   HayrXVPN:
@@ -12,7 +16,7 @@ targets:
         INFOPLIST_FILE: App/Info.plist
         CODE_SIGN_ENTITLEMENTS: App/HayrXVPN.entitlements
         CODE_SIGN_STYLE: Manual
-        DEVELOPMENT_TEAM: YOUR_TEAM_ID
+        DEVELOPMENT_TEAM: YOUR_TEAM_ID # <-- Замени на свой Team ID
     dependencies:
       - target: HayrXVPNTunnel
         embed: true
@@ -28,4 +32,4 @@ targets:
         INFOPLIST_FILE: VPNTunnelExtension/Info.plist
         CODE_SIGN_ENTITLEMENTS: VPNTunnelExtension/HayrXVPNTunnel.entitlements
         CODE_SIGN_STYLE: Manual
-        DEVELOPMENT_TEAM: YOUR_TEAM_ID
+        DEVELOPMENT_TEAM: YOUR_TEAM_ID # <-- Замени на свой Team ID
