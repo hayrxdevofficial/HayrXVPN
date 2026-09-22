@@ -6,7 +6,6 @@ options:
     iOS: "15.0"
   createIntermediateGroups: true
 
-# 👇 ОБЪЯВЛЕНИЕ ПАКЕТА (на уровне всего проекта)
 packages:
   SwiftyXrayKit:
     url: https://github.com/dima-u/SwiftyXrayKit
@@ -14,13 +13,11 @@ packages:
 
 settings:
   base:
+    # ✅ Переключаемся на Swift 5.9, чтобы избежать строгих проверок Swift 6
     SWIFT_VERSION: "5.9"
     IPHONEOS_DEPLOYMENT_TARGET: "15.0"
 
 targets:
-  # ═══════════════════════════════════════════
-  # Основное приложение
-  # ═══════════════════════════════════════════
   HayrXVPN:
     type: application
     platform: iOS
@@ -38,13 +35,14 @@ targets:
         TARGETED_DEVICE_FAMILY: "1,2"
         MARKETING_VERSION: "1.0.0"
         CURRENT_PROJECT_VERSION: "1"
+        # ✅ Явно отключаем подпись для сборки архива
+        CODE_SIGNING_ALLOWED: "NO"
+        CODE_SIGNING_REQUIRED: "NO"
+        CODE_SIGN_IDENTITY: ""
     dependencies:
       - target: HayrXVPNTunnel
         embed: true
 
-  # ═══════════════════════════════════════════
-  # VPN-расширение
-  # ═══════════════════════════════════════════
   HayrXVPNTunnel:
     type: app-extension
     platform: iOS
@@ -61,7 +59,9 @@ targets:
         DEVELOPMENT_TEAM: YOUR_TEAM_ID
         MARKETING_VERSION: "1.0.0"
         CURRENT_PROJECT_VERSION: "1"
-    # 👇 ЭТА ЗАВИСИМОСТЬ БЫЛА ПРОПУЩЕНА — ИЗ-ЗА НЕЁ ОШИБКА "XrayBridge not found"
+        CODE_SIGNING_ALLOWED: "NO"
+        CODE_SIGNING_REQUIRED: "NO"
+        CODE_SIGN_IDENTITY: ""
     dependencies:
       - package: SwiftyXrayKit
         product: SwiftyXrayKit
