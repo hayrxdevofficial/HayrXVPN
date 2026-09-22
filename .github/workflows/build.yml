@@ -1,4 +1,4 @@
-name: Build HayrXVPN
+name: Build HayrXVPN IPA
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build iOS App
+    name: Build Unsigned IPA
     runs-on: macos-15
 
     steps:
@@ -25,17 +25,31 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
-      - name: List files
-        run: ls -la
-
-      - name: Build app (без подписи)
+      - name: Archive app
         run: |
-          xcodebuild \
+          xcodebuild archive \
             -project HayrXVPN.xcodeproj \
             -scheme HayrXVPN \
             -sdk iphoneos \
             -configuration Release \
+            -archivePath ./build/HayrXVPN.xcarchive \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
-            build
+            SKIP_INSTALL=NO \
+            BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+
+      - name: Package IPA
+        run: |
+          mkdir -p ./build/Payload
+          cp -r ./build/HayrXVPN.xcarchive/Products/Applications/HayrXVPN.app ./build/Payload/
+          cd ./build
+          zip -r HayrXVPN.ipa Payload
+          ls -la
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HayrXVPN-unsigned-ipa
+          path: ./build/HayrXVPN.ipa
+          retention-days: 30
